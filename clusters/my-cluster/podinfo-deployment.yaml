@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: wordpress
-          image: wordpress:6.3.0 # {"$imagepolicy": "flux-system:wordpress"}
+          image: wordpress:6.3.1 # {"$imagepolicy": "flux-system:wordpress"}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
