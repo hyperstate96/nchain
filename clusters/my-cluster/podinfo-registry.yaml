@@ -1,9 +1,0 @@
----
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImageRepository
-metadata:
-  name: wordpress
-  namespace: flux-system
-spec:
-  image: wordpress
-  interval: 3m0s
