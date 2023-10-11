@@ -9,7 +9,9 @@ Use case created on minikube version: v1.31.2
 
 ## Setting up FluxCD on the cluster.
 
-###First install Flux
+### First install Flux 
+
+Based on your operating system of choice:
 
 https://fluxcd.io/flux/installation/
 
@@ -20,7 +22,7 @@ Repository with name: Nchain
 Cluster name: nchain
 and personal access key 
 
-flux bootstrap github   --components-extra=image-reflector-controller,image-automation-controller   --owner=hyperstate96   --repository=nchain   --branch=main   --path=clusters/nchain   --read-write-key   --personal
+`flux bootstrap github   --components-extra=image-reflector-controller,image-automation-controller   --owner=hyperstate96   --repository=nchain   --branch=main   --path=clusters/nchain   --read-write-key   --personal`
 
 This will configure FluxCD on the cluster with the before mentioned repository name. 
 
@@ -33,7 +35,7 @@ We simply use Bitnami's created Helm chart, but with our custom variables which 
 
 Command for installation is: 
 
-helm install wordpress -f values.yaml oci://registry-1.docker.io/bitnamicharts/wordpress
+`helm install wordpress -f values.yaml oci://registry-1.docker.io/bitnamicharts/wordpress`
 
 In values.yaml version is pinned to 6.3.0 , so we can test the update to latest 6.3.1 version 
 
