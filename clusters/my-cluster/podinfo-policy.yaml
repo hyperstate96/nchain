@@ -2,11 +2,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
-  name: podinfo
+  name: wordpress
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: podinfo
+    name: wordpress
   policy:
     semver:
-      range: 5.0.x
+      range: 6.3.x

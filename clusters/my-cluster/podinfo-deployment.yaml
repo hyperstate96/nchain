@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: podinfo
+  name: wordpress
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: podinfo
+      app: wordpress
   template:
     metadata:
       labels:
-        app: podinfo
+        app: wordpress
     spec:
       containers:
-        - name: podinfod
-          image: ghcr.io/stefanprodan/podinfo:5.0.0 # {"$imagepolicy": "flux-system:podinfo"}
+        - name: wordpress
+          image: wordpress:6.3.0 # {"$imagepolicy": "flux-system:wordpress"}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
