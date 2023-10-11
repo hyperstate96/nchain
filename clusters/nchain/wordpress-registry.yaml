@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   image: wordpress
-  interval: 3m0s
+  interval: 5m0s

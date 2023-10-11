@@ -1,0 +1,124 @@
+
+image:
+  registry: docker.io
+  repository: bitnami/wordpress
+  tag: 6.3.0
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ##
+  # pullSecrets:
+  #   - myRegistryKeySecretName
+  ## Set to true if you would like to see extra information on logs
+  ##
+  debug: false
+
+wordpressUsername: user
+wordpressPassword: "password"
+wordpressSkipInstall: false
+
+# updateStrategy:
+#   type: RollingUpdate
+
+## Set to `false` to allow the container to be started with blank passwords
+## ref: https://github.com/bitnami/bitnami-docker-wordpress#environment-variables
+##
+allowEmptyPassword: true
+
+replicaCount: 1
+
+
+securityContext:
+  enabled: true
+  fsGroup: 1001
+  runAsUser: 1001
+
+## Allow health checks to be pointed at the https port
+# healthcheckHttps: false
+
+
+## Kubernetes configuration
+## For minikube, set this to NodePort, elsewhere use LoadBalancer or ClusterIP
+##
+service:
+  type: NodePort
+  ## HTTP Port
+  port: 80
+  ## HTTPS Port
+  httpsPort: 443
+  httpsTargetPort: https
+  ## Metrics Port
+  ##
+  # metricsPort: 9117
+  ## Node Ports to expose
+  ## nodePorts:
+  ##   http: <to set explicitly, choose port between 30000-32767>
+  ##   https: <to set explicitly, choose port between 30000-32767>
+  ##   metrics: <to set explicitly, choose port between 30000-32767>
+  nodePorts:
+    http: ""
+    https: ""
+    metrics: ""
+  ## Enable client source IP preservation
+  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+  ##
+  # externalTrafficPolicy: Cluster
+  annotations: {}
+  ## Limits which cidr blocks can connect to service's load balancer
+  ## Only valid if service.type: LoadBalancer
+  loadBalancerSourceRanges: []
+  ## Extra ports to expose (normally used with the `sidecar` value)
+  # extraPorts:
+
+## Configure the ingress resource that allows you to access the
+## WordPress installation. Set up the URL
+## ref: http://kubernetes.io/docs/user-guide/ingress/
+##
+ingress:
+  ## Set to true to enable ingress record generation
+  ##
+  enabled: false
+
+  ## Set this to true in order to add the corresponding annotations for cert-manager
+  ##
+  certManager: false
+
+  ## When the ingress is enabled, a host pointing to this will be created
+  ##
+  hostname: wordpress.local
+
+ 
+  secrets: []
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+mariadb:
+  enabled: true
+  replication:
+    enabled: false
+  db:
+    name: bitnami_wordpress
+    user: bn_wordpress
+
+  master:
+    persistence:
+      enabled: true
+      ## mariadb data Persistent Volume Storage Class
+      ## If defined, storageClassName: <storageClass>
+      ## If set to "-", storageClassName: "", which disables dynamic provisioning
+      ## If undefined (the default) or set to null, no storageClassName spec is
+      ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+      ##   GKE, AWS & OpenStack)
+      ##
+      # storageClass: "-"
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+
