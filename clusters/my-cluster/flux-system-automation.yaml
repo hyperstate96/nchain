@@ -16,10 +16,10 @@ spec:
       messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
     push:
       branch: main
-  interval: 5m0s
+  interval: 3m0s
   sourceRef:
     kind: GitRepository
-    name: nchain
+    name: flux-system
   update:
     path: ./clusters/my-cluster
     strategy: Setters
