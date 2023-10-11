@@ -16,7 +16,7 @@ spec:
         - name: wordpress
           image: wordpress:6.3.0 # {"$imagepolicy": "flux-system:wordpress"}
           imagePullPolicy: IfNotPresent
-          ports:
-            - name: http
-              containerPort: 9898
-              protocol: TCP
+          # ports:
+          #   - name: http
+          #     containerPort: 9898
+          #     protocol: TCP
